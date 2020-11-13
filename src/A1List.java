@@ -30,7 +30,30 @@ public class A1List extends List {
     }
 
     public boolean Delete(Dictionary d) {
-        return false;
+        A1List forward = this;
+        A1List backward = this.prev;
+        boolean found = false;
+        while (forward.size!=-1) {
+            if (forward.key==d.key) {
+                if (forward==d){
+                    forward.prev.next = forward.next;
+                    forward.next.prev = forward.prev;
+                    found = true;
+                }
+            }
+            forward = forward.next;
+        }
+        while (backward.size!=-1) {
+            if (backward.key==d.key) {
+                if (backward==d) {
+                    backward.prev.next = backward.next;
+                    backward.next.prev = backward.prev;
+                    found = true;
+                }
+            }
+            backward = backward.prev;
+        }
+        return found;
     }
 
     public A1List Find(int k, boolean exact) {
